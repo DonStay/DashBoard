@@ -1,0 +1,9 @@
+[project]
+name = "udemy-etl"
+version = "0.1.0"
+description = "ETL del export de Udemy a courses.json"
+requires-python = ">=3.10"
+dependencies = ["pandas>=2.2", "openpyxl>=3.1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
