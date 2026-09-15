@@ -4,6 +4,13 @@ import { filtersAreEmpty, useFilterStore } from '../store/filters'
 
 const statuses: CourseStatus[] = ['active', 'unavailable', 'practice_exam']
 
+const progressPresets = [
+  { value: 0, label: 'Todos' },
+  { value: 1, label: 'Empezados' },
+  { value: 50, label: 'Más de la mitad' },
+  { value: 100, label: 'Completados' },
+]
+
 type Props = { stats: Dataset['stats']; topTechnologies: string[]; resultCount: number }
 
 export function FiltersBar({ stats, topTechnologies, resultCount }: Props) {
@@ -25,19 +32,6 @@ export function FiltersBar({ stats, topTechnologies, resultCount }: Props) {
           placeholder="Buscar por título, instructor o tecnología…"
           className="min-w-64 flex-1 rounded-lg border border-slate-700 bg-slate-950/60 px-4 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-violet-500"
         />
-        <label className="flex items-center gap-2 text-xs text-slate-400">
-          Progreso mínimo
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={10}
-            value={filters.minProgress}
-            onChange={(event) => setMinProgress(Number(event.target.value))}
-            className="accent-violet-500"
-          />
-          <span className="w-10 text-right text-slate-200">{filters.minProgress}%</span>
-        </label>
         <span className="text-xs text-slate-400">{resultCount} resultados</span>
         {!filtersAreEmpty(filters) && (
           <button
@@ -48,6 +42,36 @@ export function FiltersBar({ stats, topTechnologies, resultCount }: Props) {
             Limpiar
           </button>
         )}
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
+        <span className="w-20 shrink-0 text-xs uppercase tracking-wide text-slate-500">Progreso</span>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          step={5}
+          value={filters.minProgress}
+          onChange={(event) => setMinProgress(Number(event.target.value))}
+          aria-label="Progreso mínimo"
+          className="h-1.5 w-64 cursor-pointer accent-violet-500"
+        />
+        <span className="w-24 text-xs text-slate-300">mínimo {filters.minProgress}%</span>
+        {progressPresets.map((preset) => (
+          <button
+            key={preset.value}
+            type="button"
+            aria-pressed={filters.minProgress === preset.value}
+            onClick={() => setMinProgress(preset.value)}
+            className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+              filters.minProgress === preset.value
+                ? 'border-violet-400 bg-violet-500/20 text-violet-100'
+                : 'border-slate-700 text-slate-400 hover:border-slate-500 hover:text-slate-200'
+            }`}
+          >
+            {preset.label}
+          </button>
+        ))}
       </div>
 
       <ChipRow

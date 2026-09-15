@@ -31,7 +31,7 @@ export function StudyPlanPanel({ courses }: Props) {
             max={40}
             value={hoursPerWeek}
             onChange={(event) => setHoursPerWeek(Number(event.target.value))}
-            className="accent-violet-500"
+            className="h-1.5 w-56 cursor-pointer accent-violet-500"
           />
           <span className="w-20 text-right text-slate-200">{hoursPerWeek} h/semana</span>
         </label>
