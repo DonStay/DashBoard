@@ -42,6 +42,15 @@ npm run build      # tsc + vite build
 npm run lint       # oxlint
 ```
 
+### 3. Publicar en GitHub Pages
+
+`.github/workflows/deploy.yml` compila el frontend y lo publica en cada push a `main`.
+Solo hay que activarlo una vez en **Settings → Pages → Build and deployment → Source:
+GitHub Actions**. La app queda en `https://<usuario>.github.io/<repo>/`.
+
+El workflow pasa `VITE_BASE=/<repo>/` para que los assets y los JSON de `public/data`
+resuelvan bajo el subdirectorio del repo (`import.meta.env.BASE_URL`).
+
 ## Qué hace el ETL
 
 - Lee las 5 hojas (`Resumen`, `Temario Completo`, `Objetivos de Aprendizaje`,
