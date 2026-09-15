@@ -2,8 +2,6 @@
 
 ### ▶ [Abrir el dashboard](https://donstay.github.io/DashBoard/)
 
-App en vivo: <https://donstay.github.io/DashBoard/> (se redespliega sola en cada push a `main`).
-
 ETL en Python que limpia un export real de Udemy (573 cursos, 5 hojas de Excel con
 nulos y formatos inconsistentes) y lo publica como `courses.json`, más un frontend
 React que lo consume directamente — sin base de datos ni API.
